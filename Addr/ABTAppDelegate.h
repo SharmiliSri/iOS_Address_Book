@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ABTAppDelegate : UIResponder <UIApplicationDelegate>
-
+{
+    UINavigationController* nav;
+}
 @property (strong, nonatomic) UIWindow *window;
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A1300AD18DBF9B70002C774 /* ABTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1300AC18DBF9B70002C774 /* ABTModel.m */; };
 		3A147E6E18DAA90600C58EC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A147E6D18DAA90600C58EC2 /* Foundation.framework */; };
 		3A147E7018DAA90600C58EC2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A147E6F18DAA90600C58EC2 /* CoreGraphics.framework */; };
 		3A147E7218DAA90600C58EC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A147E7118DAA90600C58EC2 /* UIKit.framework */; };
@@ -19,6 +20,9 @@
 		3A147E8918DAA90600C58EC2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A147E7118DAA90600C58EC2 /* UIKit.framework */; };
 		3A147E9118DAA90600C58EC2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A147E8F18DAA90600C58EC2 /* InfoPlist.strings */; };
 		3A147E9318DAA90600C58EC2 /* AddrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147E9218DAA90600C58EC2 /* AddrTests.m */; };
+		3A147E9E18DAAA8A00C58EC2 /* ABTAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147E9D18DAAA8A00C58EC2 /* ABTAddViewController.m */; };
+		3A147EA118DAB4C800C58EC2 /* ABTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147EA018DAB4C800C58EC2 /* ABTListViewController.m */; };
+		3A981E4D18E0091B00CCACE8 /* ABTDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A981E4C18E0091B00CCACE8 /* ABTDetailedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A1300AB18DBF9B70002C774 /* ABTModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTModel.h; sourceTree = "<group>"; };
+		3A1300AC18DBF9B70002C774 /* ABTModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTModel.m; sourceTree = "<group>"; };
+		3A1300AE18DC46ED0002C774 /* ABTDelegateFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABTDelegateFile.h; sourceTree = "<group>"; };
 		3A147E6A18DAA90600C58EC2 /* Addr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Addr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A147E6D18DAA90600C58EC2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A147E6F18DAA90600C58EC2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +55,12 @@
 		3A147E8E18DAA90600C58EC2 /* AddrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AddrTests-Info.plist"; sourceTree = "<group>"; };
 		3A147E9018DAA90600C58EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A147E9218DAA90600C58EC2 /* AddrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddrTests.m; sourceTree = "<group>"; };
+		3A147E9C18DAAA8A00C58EC2 /* ABTAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTAddViewController.h; sourceTree = "<group>"; };
+		3A147E9D18DAAA8A00C58EC2 /* ABTAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTAddViewController.m; sourceTree = "<group>"; };
+		3A147E9F18DAB4C800C58EC2 /* ABTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTListViewController.h; sourceTree = "<group>"; };
+		3A147EA018DAB4C800C58EC2 /* ABTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTListViewController.m; sourceTree = "<group>"; };
+		3A981E4B18E0091B00CCACE8 /* ABTDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTDetailedViewController.h; sourceTree = "<group>"; };
+		3A981E4C18E0091B00CCACE8 /* ABTDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTDetailedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +122,15 @@
 			children = (
 				3A147E7C18DAA90600C58EC2 /* ABTAppDelegate.h */,
 				3A147E7D18DAA90600C58EC2 /* ABTAppDelegate.m */,
+				3A147E9F18DAB4C800C58EC2 /* ABTListViewController.h */,
+				3A147EA018DAB4C800C58EC2 /* ABTListViewController.m */,
+				3A1300AE18DC46ED0002C774 /* ABTDelegateFile.h */,
+				3A1300AB18DBF9B70002C774 /* ABTModel.h */,
+				3A1300AC18DBF9B70002C774 /* ABTModel.m */,
+				3A147E9C18DAAA8A00C58EC2 /* ABTAddViewController.h */,
+				3A147E9D18DAAA8A00C58EC2 /* ABTAddViewController.m */,
+				3A981E4B18E0091B00CCACE8 /* ABTDetailedViewController.h */,
+				3A981E4C18E0091B00CCACE8 /* ABTDetailedViewController.m */,
 				3A147E7F18DAA90600C58EC2 /* Images.xcassets */,
 				3A147E7418DAA90600C58EC2 /* Supporting Files */,
 			);
@@ -240,7 +262,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A981E4D18E0091B00CCACE8 /* ABTDetailedViewController.m in Sources */,
+				3A147EA118DAB4C800C58EC2 /* ABTListViewController.m in Sources */,
+				3A1300AD18DBF9B70002C774 /* ABTModel.m in Sources */,
 				3A147E7E18DAA90600C58EC2 /* ABTAppDelegate.m in Sources */,
+				3A147E9E18DAAA8A00C58EC2 /* ABTAddViewController.m in Sources */,
 				3A147E7A18DAA90600C58EC2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +468,7 @@
 				3A147E9818DAA90600C58EC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3A147E9918DAA90600C58EC2 /* Build configuration list for PBXNativeTarget "AddrTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +477,7 @@
 				3A147E9B18DAA90600C58EC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

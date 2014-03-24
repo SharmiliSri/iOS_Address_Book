@@ -7,6 +7,7 @@
 //
 
 #import "ABTAppDelegate.h"
+#import "ABTListViewController.h"
 
 @implementation ABTAppDelegate
 
@@ -14,6 +15,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+     nav = [[UINavigationController alloc] initWithRootViewController:[[ABTListViewController alloc] init]];
+    
+     [[self window] setRootViewController:nav];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
