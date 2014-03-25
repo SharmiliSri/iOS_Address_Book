@@ -53,10 +53,6 @@
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-   /* TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
-    [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
-    [TFDOB setPlaceholder:@"Eg: DD/MM/YYYY"];*/
-    
     DOB=[[UIDatePicker alloc] initWithFrame:CGRectMake(0, 180, 200, 31)];
     [DOB setMaximumDate:[NSDate date]];
     [DOB setDatePickerMode:UIDatePickerModeDate];
