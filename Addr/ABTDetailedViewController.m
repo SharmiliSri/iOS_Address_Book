@@ -51,7 +51,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIBarButtonItem *Del = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(pushrootcontroller)];
+    UIBarButtonItem *Del = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(delChosen)];
     
     self.navigationItem.rightBarButtonItem = Del;
     self.title = @"Detailed View";
@@ -70,6 +70,24 @@
     [_delegate itemDeleted:Ipath];
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) delChosen
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deletion Initiated"
+                                                    message:@"Are you sure to delete the item?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
+    [alert show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   if(buttonIndex == [alertView firstOtherButtonIndex])
+       [self pushrootcontroller];
 }
 
 @end

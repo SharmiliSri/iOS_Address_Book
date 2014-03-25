@@ -10,7 +10,7 @@
 #import "ABTModel.h"
 #import "ABTDelegateFile.h"
 
-@interface ABTDetailedViewController : UIViewController
+@interface ABTDetailedViewController : UIViewController<UIAlertViewDelegate>
 {
     NSIndexPath *Ipath;
     UILabel *Lname,*Lphone,*Lmail,*Ldob;
