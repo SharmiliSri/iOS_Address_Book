@@ -13,8 +13,9 @@
 @interface ABTAddViewController : UIViewController
 {
 UILabel *LName,*LPNO,*LMail,*LDOB;
-UITextField *TFName,*TFPNO,*TFMail,*TFDOB;
+UITextField *TFName,*TFPNO,*TFMail;
 UIButton *submit;
+UIDatePicker *DOB;
 
 ABTModel *sharedmodel;
 

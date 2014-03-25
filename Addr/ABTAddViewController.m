@@ -53,12 +53,17 @@
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
+   /* TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
     [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
-    [TFDOB setPlaceholder:@"Eg: DD/MM/YYYY"];
+    [TFDOB setPlaceholder:@"Eg: DD/MM/YYYY"];*/
+    
+    DOB=[[UIDatePicker alloc] initWithFrame:CGRectMake(0, 180, 200, 31)];
+    [DOB setMaximumDate:[NSDate date]];
+    [DOB setDatePickerMode:UIDatePickerModeDate];
+    DOB.transform= CGAffineTransformMake(0.75, 0, 0, 0.75, 0, 0);
     
     submit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [submit setFrame:CGRectMake(120, 240, 72, 31)];
+    [submit setFrame:CGRectMake(120, 360, 72, 31)];
     [submit addTarget:self
                action:@selector(addContact:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -72,7 +77,8 @@
     [self.view addSubview:TFName];
     [self.view addSubview:TFPNO];
     [self.view addSubview:TFMail];
-    [self.view addSubview:TFDOB];
+    //[self.view addSubview:TFDOB];
+    [self.view addSubview:DOB];
     [self.view addSubview:submit];
     
     self.title=@"Add Contact";
@@ -104,7 +110,10 @@
     [data setValue:[TFName text] forKey:@"Name"];
     [data setValue:[TFPNO text] forKey:@"PNO"];
     [data setValue:[TFMail text] forKey:@"Mail"];
-    [data setValue:[TFDOB text] forKey:@"DOB"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy"];
+    [data setValue:[formatter stringFromDate:[DOB date] ] forKey:@"DOB"];
     
     [sharedmodel addObject:data];
     
@@ -163,16 +172,6 @@
         return FALSE;
     }
     
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateStyle:NSDateFormatterShortStyle];
-    [format setDateFormat:@"dd/MM/yyyy"];
-    NSDate *validateDOB = [format dateFromString:[TFDOB text]];
-    if (validateDOB == nil)
-    {
-        [self invaidFormat:TFDOB];
-        return FALSE;
-    }
-    
     return TRUE;
 }
 
@@ -195,5 +194,18 @@
     }
     
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([TFName isFirstResponder] && [touch view] != TFName)
+        [TFName resignFirstResponder];
+    if ([TFPNO isFirstResponder] && [touch view] != TFPNO)
+        [TFPNO resignFirstResponder];
+    if ([TFMail isFirstResponder] && [touch view] != TFMail)
+        [TFMail resignFirstResponder];
+    [super touchesBegan:touches withEvent:event];
+}
+
 
 @end
