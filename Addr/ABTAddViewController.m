@@ -41,14 +41,17 @@
     
     TFName=[[UITextField alloc] initWithFrame:CGRectMake(100, 80, 200, 31)];
     [TFName setBorderStyle:UITextBorderStyleRoundedRect];
+    [TFName addTarget:self action:@selector(nameNotEntered:) forControlEvents:UIControlEventEditingChanged];
     
     TFPNO=[[UITextField alloc] initWithFrame:CGRectMake(100, 120, 200, 31)];
     [TFPNO setBorderStyle:UITextBorderStyleRoundedRect];
-    [TFPNO setPlaceholder:@"Eg: +911234567890"];
+    [TFPNO setPlaceholder:@"Eg: 1234567890"];
+    [TFPNO addTarget:self action:@selector(phtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     TFMail=[[UITextField alloc] initWithFrame:CGRectMake(100, 160, 200, 31)];
     [TFMail setBorderStyle:UITextBorderStyleRoundedRect];
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
+    [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
     [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
@@ -111,29 +114,50 @@
     }
 }
 
+-(void)phtextFieldDidChange:(UITextField *)tf
+{
+    [self fieldFormatSet:tf];
+    NSString *Regex = @"^[0-9+][0-9]{5,13}$";
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",Regex];
+    if(![test evaluateWithObject:[tf text]] || [tf text].length <=0)
+        [self invaidFormat:tf];
+    
+}
+
+-(void) mailtextFieldDidChange:(UITextField *)tf
+{
+    [self fieldFormatSet:tf];
+    NSString *Regex=@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",Regex];
+    if(![test evaluateWithObject:[tf text]] || [tf text].length <=0)
+        [self invaidFormat:tf];
+    
+}
+
+-(void) nameNotEntered:(UITextField *)tf
+{
+    [self fieldFormatSet:tf];
+    if([tf text].length <=0)
+        [self invaidFormat:tf];
+}
+
 -(BOOL) validate
 {
-    [self fieldFormatSet];
+    if(TFName.backgroundColor == UIColor.yellowColor || TFPNO.backgroundColor == UIColor.yellowColor || TFMail.backgroundColor == UIColor.yellowColor)
+        return FALSE;
+    
     if([TFName text].length <=0)
     {
         [self invaidFormat:TFName];
         return FALSE;
     }
-    
-    NSString *Regex;
-    NSPredicate *test;
-    
-   Regex = @"^((\\+)|(00))[0-9]{6,14}$";
-   test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",Regex];
-   if(![test evaluateWithObject:[TFPNO text]] || [TFPNO text].length <=0)
-   {
-       [self invaidFormat:TFPNO];
+    if([TFPNO text].length<=0)
+    {
+        [self invaidFormat:TFPNO];
         return FALSE;
-   }
-    
-    Regex=@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",Regex];
-    if(![test evaluateWithObject:[TFMail text]] || [TFMail text].length <=0)
+    }
+
+    if([TFMail text].length <=0)
     {
         [self invaidFormat:TFMail];
         return FALSE;
@@ -160,38 +184,14 @@
     tf.layer.CornerRadius = 5;
 }
 
--(void) fieldFormatSet
+-(void) fieldFormatSet:(UITextField *)tf
 {
-    if(TFName.backgroundColor == UIColor.yellowColor)
+    if(tf.backgroundColor == UIColor.yellowColor)
     {
-    TFName.backgroundColor= UIColor.whiteColor;
-    TFName.layer.borderColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
-    TFName.layer.BorderWidth = 0;
-    TFName.layer.CornerRadius = 0;
-    }
-    
-    if(TFPNO.backgroundColor == UIColor.yellowColor)
-    {
-        TFPNO.backgroundColor= UIColor.clearColor;
-        TFPNO.layer.borderColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
-        TFPNO.layer.BorderWidth = 0;
-        TFPNO.layer.CornerRadius = 0;
-    }
-    
-    if(TFMail.backgroundColor == UIColor.yellowColor)
-    {
-        TFMail.backgroundColor= UIColor.whiteColor;
-        TFMail.layer.borderColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
-        TFMail.layer.BorderWidth = 0;
-        TFMail.layer.CornerRadius = 0;
-    }
-    
-    if(TFDOB.backgroundColor == UIColor.yellowColor)
-    {
-        TFDOB.backgroundColor= UIColor.whiteColor;
-        TFDOB.layer.borderColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
-        TFDOB.layer.BorderWidth = 0;
-        TFDOB.layer.CornerRadius = 0;
+    tf.backgroundColor= UIColor.whiteColor;
+    tf.layer.borderColor=[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor;
+    tf.layer.BorderWidth = 0;
+    tf.layer.CornerRadius = 0;
     }
     
 }

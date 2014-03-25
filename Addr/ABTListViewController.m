@@ -78,6 +78,9 @@
     
     self.title = @"Address Book";
     
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
+    
     sharedmodel = [ABTModel sharedModel];
     
 }

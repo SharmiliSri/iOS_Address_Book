@@ -25,6 +25,6 @@ ABTModel *sharedmodel;
 -(void) addContact:(id) sender;
 -(BOOL) validate;
 -(void) invaidFormat:(UITextField *)tf;
--(void) fieldFormatSet;
+-(void) fieldFormatSet:(UITextField *)tf;
 
 @end

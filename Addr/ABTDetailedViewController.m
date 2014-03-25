@@ -45,6 +45,8 @@
     [self.view addSubview:Lphone];
     [self.view addSubview:Lmail];
     [self.view addSubview:Ldob];
+    
+    self.title = [data valueForKey:@"Name"];
 }
 
 - (void)viewDidLoad
@@ -54,7 +56,6 @@
     UIBarButtonItem *Del = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(delChosen)];
     
     self.navigationItem.rightBarButtonItem = Del;
-    self.title = @"Detailed View";
 }
 
 - (void)didReceiveMemoryWarning
