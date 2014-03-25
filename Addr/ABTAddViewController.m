@@ -73,7 +73,6 @@
     [self.view addSubview:TFName];
     [self.view addSubview:TFPNO];
     [self.view addSubview:TFMail];
-    //[self.view addSubview:TFDOB];
     [self.view addSubview:DOB];
     [self.view addSubview:submit];
     
@@ -191,7 +190,8 @@
     
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
     
     UITouch *touch = [[event allTouches] anyObject];
     if ([TFName isFirstResponder] && [touch view] != TFName)

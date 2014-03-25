@@ -37,6 +37,7 @@
     }
     
     [[c textLabel] setText:[sharedmodel returnContactName:[indexPath row]]];
+    c.accessoryType=UITableViewCellAccessoryDetailDisclosureButton;
      
     return c;
 }
@@ -120,6 +121,12 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
     abt.delegate=self;
     [abt setIpath:indexPath];
     [self.navigationController pushViewController:abt animated:TRUE];
+}
+
+- (void)tableView:(UITableView *)tableView
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 @end
