@@ -37,7 +37,7 @@
     }
     
     [[c textLabel] setText:[sharedmodel returnContactName:[indexPath row]]];
-    c.accessoryType=UITableViewCellAccessoryDetailDisclosureButton;
+    c.accessoryType=UITableViewCellAccessoryDetailButton;
      
     return c;
 }
@@ -108,7 +108,7 @@
 {
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        //code to be executed on the main queue after delay
+        
         [listTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:path] withRowAnimation:UITableViewRowAnimationFade];
     });
     
@@ -126,7 +126,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)tableView:(UITableView *)tableView
 accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    
+    ABTAddViewController* abt = [[ABTAddViewController alloc] init];
+    [abt setIpath:indexPath];
+    [self.navigationController pushViewController:abt animated:TRUE];
 }
 
 @end

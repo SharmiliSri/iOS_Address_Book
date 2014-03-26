@@ -29,6 +29,8 @@
 {
     [super loadView];
     
+    self.view.backgroundColor=UIColor.whiteColor;
+    
     sharedmodel = [ABTModel sharedModel];
     
     NSMutableDictionary* data=[sharedmodel returnDetail:Ipath.row];

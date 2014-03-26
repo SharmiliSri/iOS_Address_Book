@@ -22,6 +22,8 @@
 -(NSString*) returnContactName:(NSInteger) index;
 -(void) addObject:(NSMutableDictionary*) data;
 -(void) delObject:(NSInteger) row;
+-(void) updateObject:(NSMutableDictionary*) data
+                    :(NSInteger) row;
 -(NSMutableDictionary*) returnDetail:(NSInteger) row;
 
 @end

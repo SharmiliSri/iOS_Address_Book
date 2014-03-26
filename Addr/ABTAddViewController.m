@@ -13,6 +13,7 @@
 @end
 
 @implementation ABTAddViewController
+@synthesize Ipath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,6 +27,10 @@
 -(void)loadView
 {
     [super loadView];
+    
+    self.view.backgroundColor=UIColor.whiteColor;
+    
+    sharedmodel = [ABTModel sharedModel];
     
     LName=[[UILabel alloc] initWithFrame:CGRectMake(20, 80, 100, 31)];
     [LName setText:@"Name:"];
@@ -53,18 +58,51 @@
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
-    DOB=[[UIDatePicker alloc] initWithFrame:CGRectMake(0, 180, 200, 31)];
+    DOB=[[UIDatePicker alloc] init];
     [DOB setMaximumDate:[NSDate date]];
     [DOB setDatePickerMode:UIDatePickerModeDate];
-    DOB.transform= CGAffineTransformMake(0.75, 0, 0, 0.75, 0, 0);
+    [DOB addTarget:self action:@selector(DOBChange) forControlEvents:UIControlEventValueChanged];
+    
+    TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
+    [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
+    [TFDOB setInputView:DOB];
+    //[TFDOB addTarget:self action:@selector(DOBChange:) forControlEvents:UIControlEventAllTouchEvents];
+
     
     submit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [submit setFrame:CGRectMake(120, 360, 72, 31)];
-    [submit addTarget:self
-               action:@selector(addContact:)
-     forControlEvents:UIControlEventTouchUpInside];
+    [submit setFrame:CGRectMake(120, 250, 72, 31)];
+    
+    if(Ipath)
+    {
+        NSMutableDictionary* data=[sharedmodel returnDetail:Ipath.row];
+        
+        [TFName setText:[data valueForKey:@"Name"]];
+        TFName.enabled=FALSE;
+        
+        [TFPNO setText:[data valueForKey:@"PNO"]];
+        [TFMail setText:[data valueForKey:@"Mail"]];
+        [TFDOB setText:[data valueForKey:@"DOB"]];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"dd-MM-yyyy"];
+        [DOB setDate:[formatter dateFromString:[data valueForKey:@"DOB"]]];
+        
+        [submit setTitle:@"Update" forState:UIControlStateNormal];
+        [submit addTarget:self
+                   action:@selector(updateContact:)
+         forControlEvents:UIControlEventTouchUpInside];
+        
+        self.title=@"Edit Contact";
+    }
+    else
+    {
     [submit setTitle:@"Insert"
             forState:UIControlStateNormal];
+    [submit addTarget:self
+                   action:@selector(addContact:)
+         forControlEvents:UIControlEventTouchUpInside];
+        self.title=@"Add Contact";
+    }
     
     [self.view addSubview:LName];
     [self.view addSubview:LPNO];
@@ -73,10 +111,9 @@
     [self.view addSubview:TFName];
     [self.view addSubview:TFPNO];
     [self.view addSubview:TFMail];
-    [self.view addSubview:DOB];
+    [self.view addSubview:TFDOB];
     [self.view addSubview:submit];
     
-    self.title=@"Add Contact";
     
     
 }
@@ -86,7 +123,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    sharedmodel = [ABTModel sharedModel];
     
 }
 
@@ -118,6 +154,25 @@
     }
 }
 
+-(void) updateContact:(id) sender
+{
+    if([self validate])
+    {
+        NSMutableDictionary *data=[[NSMutableDictionary alloc] init];
+        [data setValue:[TFName text] forKey:@"Name"];
+        [data setValue:[TFPNO text] forKey:@"PNO"];
+        [data setValue:[TFMail text] forKey:@"Mail"];
+        [data setValue:[TFDOB text] forKey:@"DOB"];
+        
+        [sharedmodel updateObject:data
+                                 :Ipath.row];
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
+}
+
 -(void)phtextFieldDidChange:(UITextField *)tf
 {
     [self fieldFormatSet:tf];
@@ -126,6 +181,14 @@
     if(![test evaluateWithObject:[tf text]] || [tf text].length <=0)
         [self invaidFormat:tf];
     
+}
+
+-(void)DOBChange
+{
+    [self fieldFormatSet:TFDOB];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy"];
+    TFDOB.text=[formatter stringFromDate:[DOB date]];
 }
 
 -(void) mailtextFieldDidChange:(UITextField *)tf
@@ -147,7 +210,7 @@
 
 -(BOOL) validate
 {
-    if(TFName.backgroundColor == UIColor.yellowColor || TFPNO.backgroundColor == UIColor.yellowColor || TFMail.backgroundColor == UIColor.yellowColor)
+    if(TFName.backgroundColor == UIColor.yellowColor || TFPNO.backgroundColor == UIColor.yellowColor || TFMail.backgroundColor == UIColor.yellowColor || TFDOB.backgroundColor == UIColor.yellowColor)
         return FALSE;
     
     if([TFName text].length <=0)
@@ -166,6 +229,13 @@
         [self invaidFormat:TFMail];
         return FALSE;
     }
+    
+    if([TFDOB text].length <=0)
+    {
+        [self invaidFormat:TFDOB];
+        return FALSE;
+    }
+
     
     return TRUE;
 }
@@ -200,6 +270,11 @@
         [TFPNO resignFirstResponder];
     if ([TFMail isFirstResponder] && [touch view] != TFMail)
         [TFMail resignFirstResponder];
+    if ([TFDOB isFirstResponder] && [touch view] != TFDOB)
+    {
+        [self DOBChange];
+        [TFDOB resignFirstResponder];
+    }
     [super touchesBegan:touches withEvent:event];
 }
 

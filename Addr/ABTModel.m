@@ -67,4 +67,13 @@
     [contactList removeObjectAtIndex:row];
     [contactList writeToFile:docPath atomically:YES];
 }
+
+-(void) updateObject:(NSMutableDictionary*) data
+                    :(NSInteger) row
+{
+    [contactList removeObjectAtIndex:row];
+    [contactList insertObject:data atIndex:row];
+    [contactList writeToFile:docPath atomically:YES];
+    
+}
 @end
