@@ -53,11 +53,13 @@
     
     TFPNO=[[UITextField alloc] initWithFrame:CGRectMake(100, 120, 200, 31)];
     [TFPNO setBorderStyle:UITextBorderStyleRoundedRect];
+    [TFPNO setKeyboardType:UIKeyboardTypePhonePad];
     [TFPNO setPlaceholder:@"Eg: 1234567890"];
     [TFPNO addTarget:self action:@selector(phtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     TFMail=[[UITextField alloc] initWithFrame:CGRectMake(100, 160, 200, 31)];
     [TFMail setBorderStyle:UITextBorderStyleRoundedRect];
+    [TFMail setKeyboardType:UIKeyboardTypeEmailAddress];
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
