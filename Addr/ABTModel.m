@@ -11,6 +11,9 @@
 @implementation ABTModel
 @synthesize docPath;
 
+#pragma mark -
+#pragma mark Static object creation and Initialization
+
 +(id) sharedModel
 {
     static ABTModel *sharedModel = nil;
@@ -37,29 +40,13 @@
     return self;
 }
 
--(NSString*) returnContactName:(NSInteger) index
-{
-    NSMutableDictionary *item = [contactList objectAtIndex:index];
-    if(item)
-        return [item valueForKey:@"Name"];
-    else
-        return @"No contacts yet";
-}
-
--(NSInteger) returnCount
-{
-    return [contactList count];
-}
+#pragma mark -
+#pragma mark Primary Methods
 
 -(void) addObject:(NSMutableDictionary*) data
 {
     [contactList addObject:data];
     [contactList writeToFile:docPath atomically:YES];
-}
-
--(NSMutableDictionary*) returnDetail:(NSInteger) row
-{
-    return [contactList objectAtIndex:row];
 }
 
 -(void) delObject:(NSInteger) row
@@ -76,4 +63,27 @@
     [contactList writeToFile:docPath atomically:YES];
     
 }
+
+#pragma mark -
+#pragma mark Return Methods
+
+-(NSInteger) returnCount
+{
+    return [contactList count];
+}
+
+-(NSString*) returnContactName:(NSInteger) index
+{
+    NSMutableDictionary *item = [contactList objectAtIndex:index];
+    if(item)
+        return [item valueForKey:@"Name"];
+    else
+        return @"No contacts yet";
+}
+
+-(NSMutableDictionary*) returnDetail:(NSInteger) row
+{
+    return [contactList objectAtIndex:row];
+}
+
 @end

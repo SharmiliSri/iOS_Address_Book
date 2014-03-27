@@ -13,7 +13,7 @@
 @interface ABTListViewController : UIViewController <UITableViewDataSource,ABTDelegateFile,UITableViewDelegate>
 {
     UITableView *listTable;
-    UIScrollView *scroll;
+    //UIScrollView *scroll;
     
     ABTModel *sharedmodel;
 }

@@ -16,6 +16,9 @@
 
 @synthesize Ipath;
 
+#pragma mark -
+#pragma mark UIViewController Methods
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +69,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark -
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == [alertView firstOtherButtonIndex])
+        [self pushrootcontroller];
+}
+
+#pragma mark -
+#pragma mark Local Methods
+
 -(void) pushrootcontroller
 {
     [sharedmodel delObject:Ipath.row];
@@ -84,13 +99,6 @@
                                           otherButtonTitles:@"Yes", nil];
     [alert show];
     
-}
-
-- (void)alertView:(UIAlertView *)alertView
-clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   if(buttonIndex == [alertView firstOtherButtonIndex])
-       [self pushrootcontroller];
 }
 
 @end

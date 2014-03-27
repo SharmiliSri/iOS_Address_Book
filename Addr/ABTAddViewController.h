@@ -26,12 +26,15 @@ ABTModel *sharedmodel;
 @property NSIndexPath *Ipath;
 
 -(void) addContact:(id) sender;
--(BOOL) validate;
--(void) invaidFormat:(UITextField *)tf;
--(void) fieldFormatSet:(UITextField *)tf;
+-(void) updateContact:(id) sender;
+-(void)DOBChange;
+
+-(void) nameNotEntered:(UITextField *)tf;
 -(void)phtextFieldDidChange:(UITextField *)tf;
 -(void) mailtextFieldDidChange:(UITextField *)tf;
--(void) nameNotEntered:(UITextField *)tf;
--(void) updateContact:(id) sender;
+-(BOOL) validate;
+
+-(void) invaidFormat:(UITextField *)tf;
+-(void) fieldFormatSet:(UITextField *)tf;
 
 @end

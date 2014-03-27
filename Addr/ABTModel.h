@@ -18,12 +18,12 @@
 //@property (nonatomic, readonly)NSMutableArray *contactList;
 
 +(id) sharedModel;
--(NSInteger) returnCount;
--(NSString*) returnContactName:(NSInteger) index;
 -(void) addObject:(NSMutableDictionary*) data;
 -(void) delObject:(NSInteger) row;
 -(void) updateObject:(NSMutableDictionary*) data
                     :(NSInteger) row;
+-(NSInteger) returnCount;
+-(NSString*) returnContactName:(NSInteger) index;
 -(NSMutableDictionary*) returnDetail:(NSInteger) row;
 
 @end

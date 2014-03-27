@@ -17,6 +17,9 @@
 
 @implementation ABTListViewController
 
+#pragma mark -
+#pragma mark UITableViewDataSource Methods
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
@@ -28,19 +31,32 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *c = [listTable dequeueReusableCellWithIdentifier:@""];
+    
+    UITableViewCell *c = [listTable dequeueReusableCellWithIdentifier:@"reuse"];
+    
     if (!c)
     {
         // Only allocate a new cell if none are available
+       // NSLog(@"Cell Created:%d",[self tableView:tableView
+      //                                  numberOfRowsInSection:0]);
         c = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:@""];
+                                   reuseIdentifier:@"reuse"];
     }
+//    else 
+       // NSLog(@"Cell Reused:%d",[self tableView:tableView
+      //                              numberOfRowsInSection:0]);
+    
     
     [[c textLabel] setText:[sharedmodel returnContactName:[indexPath row]]];
+    
+    //NSLog(@"%@",[c.textLabel text]);
     c.accessoryType=UITableViewCellAccessoryDetailButton;
      
     return c;
 }
+
+#pragma mark -
+#pragma mark UIViewController Methods
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,15 +71,15 @@
 {
     [super loadView];
     
-    listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 80, 300, 380)
+    listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 300, 480)
                                              style:UITableViewStylePlain];
     [listTable setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
     [listTable setDataSource:self];
     [listTable setDelegate:self];
     
-    scroll=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 80, 300, 380)];
+    //scroll=[[UIScrollView alloc] initWithFrame:CGRectMake(0, 80, 300, 380)];
     
-    [self.view addSubview:scroll];
+    //[self.view addSubview:scroll];
     [self.view addSubview:listTable];
     
 }
@@ -86,18 +102,14 @@
     
 }
 
-- (void) pushsecondcontroller
-{
-    ABTAddViewController* abt = [[ABTAddViewController alloc] init];
-    abt.delegate=self;
-    [self.navigationController pushViewController:abt animated:TRUE];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark -
+#pragma mark ABTDelegateFile Methods
 
 -(void) itemAdded
 {
@@ -114,6 +126,9 @@
     
 }
 
+#pragma mark -
+#pragma mark UITableViewDelegate Methods
+
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -128,6 +143,16 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     ABTAddViewController* abt = [[ABTAddViewController alloc] init];
     [abt setIpath:indexPath];
+    [self.navigationController pushViewController:abt animated:TRUE];
+}
+
+#pragma mark -
+#pragma mark Local Methods
+
+- (void) pushsecondcontroller
+{
+    ABTAddViewController* abt = [[ABTAddViewController alloc] init];
+    abt.delegate=self;
     [self.navigationController pushViewController:abt animated:TRUE];
 }
 

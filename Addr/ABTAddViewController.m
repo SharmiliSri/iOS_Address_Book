@@ -15,6 +15,9 @@
 @implementation ABTAddViewController
 @synthesize Ipath;
 
+#pragma mark -
+#pragma mark UIViewController Methods
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,8 +69,6 @@
     TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
     [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
     [TFDOB setInputView:DOB];
-    //[TFDOB addTarget:self action:@selector(DOBChange:) forControlEvents:UIControlEventAllTouchEvents];
-
     
     submit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submit setFrame:CGRectMake(120, 250, 72, 31)];
@@ -123,7 +124,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +131,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([TFName isFirstResponder] && [touch view] != TFName)
+        [TFName resignFirstResponder];
+    if ([TFPNO isFirstResponder] && [touch view] != TFPNO)
+        [TFPNO resignFirstResponder];
+    if ([TFMail isFirstResponder] && [touch view] != TFMail)
+        [TFMail resignFirstResponder];
+    if ([TFDOB isFirstResponder] && [touch view] != TFDOB)
+    {
+        [self DOBChange];
+        [TFDOB resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
+}
+
+#pragma mark -
+#pragma mark Local Methods
 
 -(void) addContact:(id) sender
 {
@@ -173,6 +194,24 @@
 
 }
 
+-(void)DOBChange
+{
+    [self fieldFormatSet:TFDOB];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy"];
+    TFDOB.text=[formatter stringFromDate:[DOB date]];
+}
+
+#pragma mark -
+#pragma mark Validation methods
+
+-(void) nameNotEntered:(UITextField *)tf
+{
+    [self fieldFormatSet:tf];
+    if([tf text].length <=0)
+        [self invaidFormat:tf];
+}
+
 -(void)phtextFieldDidChange:(UITextField *)tf
 {
     [self fieldFormatSet:tf];
@@ -181,14 +220,6 @@
     if(![test evaluateWithObject:[tf text]] || [tf text].length <=0)
         [self invaidFormat:tf];
     
-}
-
--(void)DOBChange
-{
-    [self fieldFormatSet:TFDOB];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy"];
-    TFDOB.text=[formatter stringFromDate:[DOB date]];
 }
 
 -(void) mailtextFieldDidChange:(UITextField *)tf
@@ -201,12 +232,6 @@
     
 }
 
--(void) nameNotEntered:(UITextField *)tf
-{
-    [self fieldFormatSet:tf];
-    if([tf text].length <=0)
-        [self invaidFormat:tf];
-}
 
 -(BOOL) validate
 {
@@ -240,6 +265,9 @@
     return TRUE;
 }
 
+#pragma mark -
+#pragma mark Format setting
+
 -(void) invaidFormat:(UITextField *)tf
 {
     tf.backgroundColor= UIColor.yellowColor;
@@ -259,24 +287,5 @@
     }
     
 }
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([TFName isFirstResponder] && [touch view] != TFName)
-        [TFName resignFirstResponder];
-    if ([TFPNO isFirstResponder] && [touch view] != TFPNO)
-        [TFPNO resignFirstResponder];
-    if ([TFMail isFirstResponder] && [touch view] != TFMail)
-        [TFMail resignFirstResponder];
-    if ([TFDOB isFirstResponder] && [touch view] != TFDOB)
-    {
-        [self DOBChange];
-        [TFDOB resignFirstResponder];
-    }
-    [super touchesBegan:touches withEvent:event];
-}
-
 
 @end

@@ -20,6 +20,8 @@
 
 @property (nonatomic,assign) id <ABTDelegateFile> delegate;
 @property NSIndexPath *Ipath;
+
 -(void) pushrootcontroller;
+-(void) delChosen;
 
 @end
