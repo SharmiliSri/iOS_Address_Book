@@ -50,6 +50,7 @@
     TFName=[[UITextField alloc] initWithFrame:CGRectMake(100, 80, 200, 31)];
     [TFName setBorderStyle:UITextBorderStyleRoundedRect];
     [TFName addTarget:self action:@selector(nameNotEntered:) forControlEvents:UIControlEventEditingChanged];
+    TFName.delegate=self;
     
     TFPNO=[[UITextField alloc] initWithFrame:CGRectMake(100, 120, 200, 31)];
     [TFPNO setBorderStyle:UITextBorderStyleRoundedRect];
@@ -62,6 +63,7 @@
     [TFMail setKeyboardType:UIKeyboardTypeEmailAddress];
     [TFMail setPlaceholder:@"Eg: mail@mail.com"];
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    TFMail.delegate=self;
     
     DOB=[[UIDatePicker alloc] init];
     [DOB setMaximumDate:[NSDate date]];
@@ -71,6 +73,7 @@
     TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
     [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
     [TFDOB setInputView:DOB];
+    [TFDOB addTarget:self action:@selector(TFDOBTouched) forControlEvents:UIControlEventAllTouchEvents];
     
     submit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [submit setFrame:CGRectMake(120, 250, 72, 31)];
@@ -117,14 +120,13 @@
     [self.view addSubview:TFDOB];
     [self.view addSubview:submit];
     
-    
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    TFtouch = false;
     
 }
 
@@ -150,6 +152,19 @@
         [TFDOB resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
+}
+
+#pragma mark -
+#pragma mark UITextFieldDelegate Methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if([textField text].length <=0 || textField.backgroundColor == UIColor.yellowColor)
+        [self invaidFormat:textField];
+    else
+    [textField resignFirstResponder];
+    
+    return YES;
 }
 
 #pragma mark -
@@ -202,6 +217,18 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"dd-MM-yyyy"];
     TFDOB.text=[formatter stringFromDate:[DOB date]];
+}
+
+-(void)TFDOBTouched
+{
+   if(!TFtouch)
+       TFtouch=true;
+    else
+    {
+        TFtouch=false;
+        [self DOBChange];
+        [TFDOB resignFirstResponder];
+    }
 }
 
 #pragma mark -

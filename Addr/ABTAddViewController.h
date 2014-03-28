@@ -10,7 +10,7 @@
 #import "ABTModel.h"
 #import "ABTDelegateFile.h"
 
-@interface ABTAddViewController : UIViewController
+@interface ABTAddViewController : UIViewController<UITextFieldDelegate>
 {
 UILabel *LName,*LPNO,*LMail,*LDOB;
 UITextField *TFName,*TFPNO,*TFMail,*TFDOB;
@@ -18,6 +18,7 @@ UIButton *submit;
 UIDatePicker *DOB;
 NSIndexPath *Ipath;
 
+BOOL TFtouch;
 ABTModel *sharedmodel;
 
 }
