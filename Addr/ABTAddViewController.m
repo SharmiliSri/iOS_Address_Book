@@ -58,6 +58,18 @@
     [TFPNO setPlaceholder:@"Eg: 1234567890"];
     [TFPNO addTarget:self action:@selector(phtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
+    //Auxilary Done button on numpad
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 35)];
+    
+    numberToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(phNoDone)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           nil];
+    
+    TFPNO.inputAccessoryView = numberToolbar;
+    
+    
     TFMail=[[UITextField alloc] initWithFrame:CGRectMake(100, 160, 200, 31)];
     [TFMail setBorderStyle:UITextBorderStyleRoundedRect];
     [TFMail setKeyboardType:UIKeyboardTypeEmailAddress];
@@ -229,6 +241,11 @@
         [self DOBChange];
         [TFDOB resignFirstResponder];
     }
+}
+
+-(void)phNoDone
+{
+    [self textFieldShouldReturn:TFPNO];
 }
 
 #pragma mark -
