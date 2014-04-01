@@ -22,6 +22,7 @@
 		3A147E9318DAA90600C58EC2 /* AddrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147E9218DAA90600C58EC2 /* AddrTests.m */; };
 		3A147E9E18DAAA8A00C58EC2 /* ABTAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147E9D18DAAA8A00C58EC2 /* ABTAddViewController.m */; };
 		3A147EA118DAB4C800C58EC2 /* ABTListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A147EA018DAB4C800C58EC2 /* ABTListViewController.m */; };
+		3A21B45018EADFDC00BF5084 /* DPDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A21B44F18EADFDC00BF5084 /* DPDatePickerView.m */; };
 		3A981E4D18E0091B00CCACE8 /* ABTDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A981E4C18E0091B00CCACE8 /* ABTDetailedViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,8 @@
 		3A147E9D18DAAA8A00C58EC2 /* ABTAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTAddViewController.m; sourceTree = "<group>"; };
 		3A147E9F18DAB4C800C58EC2 /* ABTListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTListViewController.h; sourceTree = "<group>"; };
 		3A147EA018DAB4C800C58EC2 /* ABTListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTListViewController.m; sourceTree = "<group>"; };
+		3A21B44E18EADFDC00BF5084 /* DPDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPDatePickerView.h; path = ../DPDatePickerView.h; sourceTree = "<group>"; };
+		3A21B44F18EADFDC00BF5084 /* DPDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DPDatePickerView.m; path = ../DPDatePickerView.m; sourceTree = "<group>"; };
 		3A981E4B18E0091B00CCACE8 /* ABTDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTDetailedViewController.h; sourceTree = "<group>"; };
 		3A981E4C18E0091B00CCACE8 /* ABTDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABTDetailedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +123,8 @@
 		3A147E7318DAA90600C58EC2 /* Addr */ = {
 			isa = PBXGroup;
 			children = (
+				3A21B44E18EADFDC00BF5084 /* DPDatePickerView.h */,
+				3A21B44F18EADFDC00BF5084 /* DPDatePickerView.m */,
 				3A147E7C18DAA90600C58EC2 /* ABTAppDelegate.h */,
 				3A147E7D18DAA90600C58EC2 /* ABTAppDelegate.m */,
 				3A147E9F18DAB4C800C58EC2 /* ABTListViewController.h */,
@@ -267,6 +272,7 @@
 				3A1300AD18DBF9B70002C774 /* ABTModel.m in Sources */,
 				3A147E7E18DAA90600C58EC2 /* ABTAppDelegate.m in Sources */,
 				3A147E9E18DAAA8A00C58EC2 /* ABTAddViewController.m in Sources */,
+				3A21B45018EADFDC00BF5084 /* DPDatePickerView.m in Sources */,
 				3A147E7A18DAA90600C58EC2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

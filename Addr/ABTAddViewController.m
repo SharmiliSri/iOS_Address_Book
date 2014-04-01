@@ -77,14 +77,17 @@
     [TFMail addTarget:self action:@selector(mailtextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     TFMail.delegate=self;
     
-    DOB=[[UIDatePicker alloc] init];
-    [DOB setMaximumDate:[NSDate date]];
-    [DOB setDatePickerMode:UIDatePickerModeDate];
-    [DOB addTarget:self action:@selector(DOBChange) forControlEvents:UIControlEventValueChanged];
+//    DOB=[[UIDatePicker alloc] init];
+//    [DOB setMaximumDate:[NSDate date]];
+//    [DOB setDatePickerMode:UIDatePickerModeDate];
+//    [DOB addTarget:self action:@selector(DOBChange) forControlEvents:UIControlEventValueChanged];
+    static NSString *const CSDataUpdatedNotification = @"CSDataUpdatedNotification";
+    DPDPV =[[DPDatePickerView alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DOBChange) name:CSDataUpdatedNotification object:nil];
     
     TFDOB=[[UITextField alloc] initWithFrame:CGRectMake(100, 200, 200, 31)];
     [TFDOB setBorderStyle:UITextBorderStyleRoundedRect];
-    [TFDOB setInputView:DOB];
+    [TFDOB setInputView:DPDPV];
     [TFDOB addTarget:self action:@selector(TFDOBTouched) forControlEvents:UIControlEventAllTouchEvents];
     
     submit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -103,7 +106,9 @@
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"dd-MM-yyyy"];
-        [DOB setDate:[formatter dateFromString:[data valueForKey:@"DOB"]]];
+        [DPDPV setdate:[formatter dateFromString:[data valueForKey:@"DOB"]]
+                      :NO
+                      :YES];
         
         [submit setTitle:@"Update" forState:UIControlStateNormal];
         [submit addTarget:self
@@ -191,10 +196,7 @@
     [data setValue:[TFName text] forKey:@"Name"];
     [data setValue:[TFPNO text] forKey:@"PNO"];
     [data setValue:[TFMail text] forKey:@"Mail"];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy"];
-    [data setValue:[formatter stringFromDate:[DOB date] ] forKey:@"DOB"];
+    [data setValue:[DPDPV seldate] forKey:@"DOB"];
     
     [sharedmodel addObject:data];
     
@@ -226,9 +228,7 @@
 -(void)DOBChange
 {
     [self fieldFormatSet:TFDOB];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy"];
-    TFDOB.text=[formatter stringFromDate:[DOB date]];
+    [TFDOB setText:[DPDPV seldate]];
 }
 
 -(void)TFDOBTouched
